@@ -1,0 +1,17 @@
+body{
+	margin-top:20px;
+	background-image: linear-gradient(#ced9ef, #cfc7fb, #e2c6ee, #efc8df, #d7e9dc );
+	
+	font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+table, th, td {
+  border: 1px solid;
+	/* border-color: purple; */
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+	box-shadow: 5px 5px 5px #888;
+}
