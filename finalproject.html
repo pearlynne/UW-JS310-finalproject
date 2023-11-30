@@ -1,0 +1,43 @@
+<html>
+
+<head></head>
+
+<body>
+
+	<div class="container">
+		<form id="new-task">
+
+			<div class="todo-form">
+				<label for="task">Task:</label><br>
+				<input type="text" id="task" name="task"data-invalid-message="Your task should have at least 1 character"><br>
+			</div>
+
+			<div class="todo-form">
+				<label for="due-date">Due date:</label><br>
+				<input type="date" id="due-date" name="due-date" data-invalid-message="The due date needs to be in the future"><br>
+			</div>
+
+			<div class="todo-form">
+				<input type="submit">
+			</div>
+
+		</form>
+	</div>
+
+
+	<div id="today-list">
+		<table>
+			<tr>
+				<th>Task</th>
+				<th>Due Date</th>
+				<th>Done</th>
+			</tr>
+		</table>
+	</div>
+	<div id="other-list">
+
+	</div>
+	<script src="finalproject.js"></script>
+</body>
+
+</html>
