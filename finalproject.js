@@ -94,8 +94,8 @@ form.addEventListener("submit", (e) => {
 		// Add to table: 
 		addTaskToTable(task, dueDate)
 		// Store to local storage ---- Need to change to proper format instead of HTML
-		localStorage.setItem("table-list",document.getElementById("table-list").innerHTML)
-		
+		localStorage.setItem("table-list", document.getElementById("table-list").innerHTML)
+
 	} else {
 		e.preventDefault();
 		form.reportValidity();
@@ -120,21 +120,30 @@ span.onclick = function () {
 	modal.style.display = "none";
 }
 
-
-
 const listOfTasks = document.getElementById("today-list");
 
 // Fetch API to display cat image after checking a task
 listOfTasks.addEventListener('change', (e) => {
-	console.log(e.target)
 	let message = ""
 	// Pick message for completed vs uncompleted tasks 
 	if (e.target.checked) {
 		message = "good%20job%21"
 		console.log(message)
+		
+		// Move marked checked!
+		setTimeout(() => {
+			const doneList = document.getElementById("done-header")
+			doneList.appendChild(e.target.closest("tr"))
+		}, 2500)
+
 	} else {
 		message = "you%20got%20this%21"
 		console.log(message)
+
+		setTimeout(() => {
+			const tableList = document.getElementById("table-header")
+			tableList.appendChild(e.target.closest("tr"))
+		}, 2500)
 	}
 
 	// Fetch API from Cataas
