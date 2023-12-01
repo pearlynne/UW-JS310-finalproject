@@ -44,19 +44,6 @@ const validDate = (inputDate) => {
 task.addEventListener("change", () => validLength(task, 1))
 dueDate.addEventListener("change", () => validDate(dueDate))
 
-// //---- Pause for now: Create Class constructor to store newTasks
-// class NewTask {
-// 	constructor(task, dueDate) {
-// 		this.name = task;
-// 		this.deadline = dueDate;
-// 	}
-// 	checkbox() {
-// 		const newCheckbox = document.createElement("input")
-// 		newCheckbox.type = "checkbox"
-// 		this.checkbox = newCheckbox
-// 	}
-// }
-
 function addTaskToTable(task, dueDate) {
 	// Create new row with cell elements for task, dudedate and checkbox 
 	const newRow = document.createElement("tr")
@@ -72,15 +59,16 @@ function addTaskToTable(task, dueDate) {
 	const newCheckbox = document.createElement("input")
 	newCheckbox.type = "checkbox"
 	colCheckBox.appendChild(newCheckbox)
-	
+	colCheckBox.classList.add("checkboxes-col")
+
 	// Append to new row and current table
 	newRow.append(colTask, colDueDate, colCheckBox)
 	table.append(newRow)
 	console.log("this works")
 
 	// Clear value
-	task.value =""
-	dueDate.value=""
+	task.value = ""
+	dueDate.value = ""
 }
 
 // Form validation for length and duedate
@@ -90,7 +78,6 @@ const formValidation = (e) => {
 	if (!validLength(task, 1)) {
 		valid = false;
 	}
-
 	if (!validDate(dueDate)) {
 		valid = false;
 	}
@@ -100,25 +87,17 @@ const formValidation = (e) => {
 
 // Event listener for form validation
 form.addEventListener("submit", (e) => {
-	
+
 	if (formValidation(e)) {
 		// Add to table: 
 		addTaskToTable(task, dueDate)
 		// Store to local storage
 
-		// ------------ Pause on it
-		// const savedTask = new NewTask(task, dueDate);
-		// savedTask.checkbox()
-		// console.log(savedTask)
-		// localStorage.setItem('savedTask', JSON.stringify(savedTask))
-
-		// form.submit();
 	} else {
 		e.preventDefault();
 		form.reportValidity();
 	}
 
-	
 })
 
 
@@ -130,16 +109,18 @@ form.addEventListener("submit", (e) => {
 // // --- Display today on page 
 
 
-// --- Get cat image API
 // Display cat image as modal image
-function showCat(catUrl){
+function showCat(catUrl) {
 	const modalImg = document.getElementById("cat-pic");
 	modal.style.display = "block";
 	modalImg.src = catUrl;
 }
 
+const listOfTasks = document.getElementById("today-list");
+
 // Fetch API to display cat image after checking a task
-document.getElementById('check').onclick = function (e) {
+listOfTasks.addEventListener('change', (e) => {
+	console.log(e.target)
 	let message = ""
 	// Pick message for completed vs uncompleted tasks 
 	if (e.target.checked) {
@@ -153,30 +134,22 @@ document.getElementById('check').onclick = function (e) {
 	// Fetch API from Cataas
 	const url = `https://cataas.com/cat/says/${message}?font=Verdana&fontSize=30&fontColor=%23fff&position=bottom`
 
-	async function getRandomCat() {
-		try {
-			// Make a GET request to the Cataas API
-			const response = await fetch(url);
-			console.log(url)
-			// Check if the response was successful
-			if (!response.ok) {
-				throw new Error('Failed to fetch cat image.');
-			}
-		} catch (error) {
-			// Log any errors that occur during the process
-			console.error(error.message);
-			throw error;
-		}
-	}
-
 	fetch(url)
+		// Check if the response was successful
+		// 	if (!response.ok) {
+		// 		throw new Error('Failed to fetch cat image.');
+		// 	}
+		// } catch (error) {
+		// 	// Log any errors that occur during the process
+		// 	console.error(error.message);
+		// 	throw error;
 		.then(function (data) {
 			return data.url
-		}).then(function (imageUrl,message) {
+		}).then(function (imageUrl, message) {
 			showCat(imageUrl)
 		})
 
-};
+});
 
 // Get the <span> element that closes the modal
 var span = document.getElementsByClassName("close")[0];
