@@ -1,10 +1,12 @@
+//Retrieve any list elements
+document.getElementById("table-list").innerHTML = localStorage.getItem("table-list");
 
 // Get form elements
 const form = document.getElementById("new-task")
 const task = document.getElementById("task")
 const dueDate = document.getElementById("due-date")
 const modal = document.getElementById("myModal");
-const table = document.querySelector("#today-list > table")
+const tableList = document.getElementById("table-list")
 
 // ---- Form validation 
 // Validate length of task
@@ -63,7 +65,7 @@ function addTaskToTable(task, dueDate) {
 
 	// Append to new row and current table
 	newRow.append(colTask, colDueDate, colCheckBox)
-	table.append(newRow)
+	tableList.append(newRow)
 	console.log("this works")
 
 	// Clear value
@@ -91,8 +93,9 @@ form.addEventListener("submit", (e) => {
 	if (formValidation(e)) {
 		// Add to table: 
 		addTaskToTable(task, dueDate)
-		// Store to local storage
-
+		// Store to local storage ---- Need to change to proper format instead of HTML
+		localStorage.setItem("table-list",document.getElementById("table-list").innerHTML)
+		
 	} else {
 		e.preventDefault();
 		form.reportValidity();
@@ -101,13 +104,6 @@ form.addEventListener("submit", (e) => {
 })
 
 
-// // ----------- Continue from here -----------
-
-
-// // Get current todo from local storage 
-// // --- https://www.youtube.com/watch?v=La5cL2jNoVw
-// // --- Display today on page 
-
 
 // Display cat image as modal image
 function showCat(catUrl) {
@@ -115,6 +111,16 @@ function showCat(catUrl) {
 	modal.style.display = "block";
 	modalImg.src = catUrl;
 }
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function () {
+	modal.style.display = "none";
+}
+
+
 
 const listOfTasks = document.getElementById("today-list");
 
@@ -150,11 +156,3 @@ listOfTasks.addEventListener('change', (e) => {
 		})
 
 });
-
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
-
-// When the user clicks on <span> (x), close the modal
-span.onclick = function () {
-	modal.style.display = "none";
-}
