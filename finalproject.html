@@ -1,24 +1,30 @@
 <html>
 
-<head></head>
+<head>
+	<title>Today's List</title>
+	<link rel="stylesheet" href="finalproject.css" />
+</head>
 
 <body>
+	<div class="container">
+		<h1>Forever to-do-list</h1>
+	</div>
 
 	<div class="container">
 		<form id="new-task">
-
 			<div class="todo-form">
-				<label for="task">Task:</label><br>
-				<input type="text" id="task" name="task"data-invalid-message="Your task should have at least 1 character"><br>
+				<label for="task">New task:</label><br>
+				<input type="text" id="task" name="task" data-invalid-message="Your task should have at least 1 character"><br>
 			</div>
 
 			<div class="todo-form">
 				<label for="due-date">Due date:</label><br>
-				<input type="date" id="due-date" name="due-date" data-invalid-message="The due date needs to be in the future"><br>
+				<input type="date" id="due-date" name="due-date"
+					data-invalid-message="The due date needs to be in the future"><br>
 			</div>
 
 			<div class="todo-form">
-				<input type="submit">
+				<input id="pleasework" type="submit">
 			</div>
 
 		</form>
@@ -27,16 +33,39 @@
 
 	<div id="today-list">
 		<table>
+			<tbody id ="table-header">
 			<tr>
-				<th>Task</th>
-				<th>Due Date</th>
-				<th>Done</th>
+				<th>Tasks</th>
+				<th>Due Dates</th>
+				<th>Progress</th>
 			</tr>
+		</tbody>		
+		<tbody id="table-list">
+		</tbody>
+		</table>
+
+		<table>
+			<tbody id ="done-header">
+			<tr>
+				<th>Tasks</th>
+				<th>Due Dates</th>
+				<th>Completed</th>
+			</tr>
+		</tbody>		
+		<tbody id="done-list">
+		</tbody>
 		</table>
 	</div>
-	<div id="other-list">
-
 	</div>
+
+
+<div id="myModal" class="modal">
+  <!-- The Close Button; to replace with setInterval???-->
+  <span class="close">&times;</span>
+  <img class="modal-content" id="cat-pic">
+</div>
+
+
 	<script src="finalproject.js"></script>
 </body>
 
