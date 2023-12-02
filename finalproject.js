@@ -1,5 +1,11 @@
-//Retrieve any list elements
+// Display incompleted tasks from local storageto table
 document.getElementById("table-list").innerHTML = localStorage.getItem("table-list");
+
+// Save only complete and incomplete lists to the local storage
+function saveTDList() {
+	localStorage.setItem("table-list", document.getElementById("table-list").innerHTML)
+	localStorage.setItem("done-list", document.getElementById("done-list").innerHTML)
+}
 
 // Get form elements
 const form = document.getElementById("new-task")
@@ -66,7 +72,6 @@ function addTaskToTable(task, dueDate) {
 	// Append to new row and current table
 	newRow.append(colTask, colDueDate, colCheckBox)
 	tableList.append(newRow)
-	console.log("this works")
 
 	// Clear value
 	task.value = ""
@@ -94,8 +99,7 @@ form.addEventListener("submit", (e) => {
 		// Add to table: 
 		addTaskToTable(task, dueDate)
 		// Store to local storage ---- Need to change to proper format instead of HTML
-		localStorage.setItem("table-list", document.getElementById("table-list").innerHTML)
-
+		saveTDList()
 	} else {
 		e.preventDefault();
 		form.reportValidity();
@@ -128,21 +132,21 @@ listOfTasks.addEventListener('change', (e) => {
 	// Pick message for completed vs uncompleted tasks 
 	if (e.target.checked) {
 		message = "good%20job%21"
-		console.log(message)
-		
+
 		// Move marked checked!
 		setTimeout(() => {
-			const doneList = document.getElementById("done-header")
+			const doneList = document.getElementById("done-list")
 			doneList.appendChild(e.target.closest("tr"))
+			saveTDList() 
 		}, 2500)
 
 	} else {
 		message = "you%20got%20this%21"
-		console.log(message)
 
 		setTimeout(() => {
-			const tableList = document.getElementById("table-header")
+			const tableList = document.getElementById("table-list")
 			tableList.appendChild(e.target.closest("tr"))
+			saveTDList()
 		}, 2500)
 	}
 
@@ -163,5 +167,11 @@ listOfTasks.addEventListener('change', (e) => {
 		}).then(function (imageUrl, message) {
 			showCat(imageUrl)
 		})
-
 });
+
+
+// non-blocking from setTimeout
+// addEventListener("input", () => {
+// 	// saveTDList()
+// 	console.log("might work?")
+// })
