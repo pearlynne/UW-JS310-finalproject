@@ -1,5 +1,5 @@
 
-# <p align="center">Everyday list <br>a minimalist to-do-list for neurodiverse cat lovers </p>
+# <p align="center">Everyday list <br><i>a minimalist to-do-list for cat lovers</i> </p>
 <p align="center">
 <img width="600" src="https://github.com/pearlynne/UW-JS310-finalproject/assets/41930579/ee769ad5-a21f-4af7-987f-3342562c6429">
 </p>
@@ -27,7 +27,7 @@ Therefore, I decided to create a basic to-do-list that focuses on tasks just for
 - Sets to local storage
 - Client-side sessions
 - Form validations
-- Modal image of cat with motivational text :heart_eyes_cat:
+- Modal image of cat with motivational text :heart_eyes_cat: when task is completed
 
 ## Project files description <a name="projectfiles"></a>
 - templates/: contains the frontend dynamic HTML file for the to-do-list
