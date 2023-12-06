@@ -37,7 +37,7 @@ Therefore, I decided to create a basic to-do-list that focuses on tasks just for
 There is still room for improvements and new features to be added. These are the following planned:
 - <input type="checkbox" disabled /> Changing local storage format to JSON:
     - It currently saves as a string of HTML text.
-- <input type="checkbox" disabled /> Add Catch errors for fethc
+- <input type="checkbox" disabled /> Add Catch errors for fetch
     - The assumption is that Cataas API remains unedited. However, if the user prefers to amend the motivational text (i.e., “Good Job!”), a catch error can help navigate that process.
 
 ## Acknowledgements/Sources <a name="sources"></a>
