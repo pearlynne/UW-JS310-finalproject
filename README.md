@@ -16,7 +16,7 @@ It is basic tool to add your tasks for the day and provide a small reward of cat
 ## Motivation <a name="motivation"></a>
 I have tried many types of productivity apps, from [Monday.com](http://Monday.com) to [Clickup](https://clickup.com/) and even [Basecamp](http://basecamp.com). They all have their advantages! However, I felt that I was always missing mini reward when I completed the tasks.  Furthermore, it can get overwhelming when we get into the weeds of tags, projects, sub-tasks, groups.
 
-Therefore, I decided to create a basic to-do-list that focuses on tasks just for the day. It stores the tasks to the local storage and removes those that have been completed. 
+Therefore, I decided to create a basic to-do-list that focuses on tasks just for the day or very near future. It stores the tasks to the local storage and removes those that have been completed. 
 
 ## Built with / Requirements <a name="builtwith"></a>
 - Javascript
@@ -27,7 +27,7 @@ Therefore, I decided to create a basic to-do-list that focuses on tasks just for
 - Sets to local storage
 - Client-side sessions
 - Form validations
-- Modal image of cat with motivational text
+- Modal image of cat with motivational text :heart_eyes_cat:
 
 ## Project files description <a name="projectfiles"></a>
 - templates/: contains the frontend dynamic HTML file for the to-do-list
