@@ -1,10 +1,10 @@
 // Display incompleted tasks from local storageto table
-document.getElementById("table-list").innerHTML = localStorage.getItem("table-list");
+document.getElementById("incomplete-tasks").innerHTML = localStorage.getItem("incomplete-tasks");
 
 // Save only complete and incomplete lists to the local storage
 function saveTDList() {
-	localStorage.setItem("table-list", document.getElementById("table-list").innerHTML)
-	localStorage.setItem("done-list", document.getElementById("done-list").innerHTML)
+	localStorage.setItem("incomplete-tasks", document.getElementById("incomplete-tasks").innerHTML)
+	localStorage.setItem("completed-tasks", document.getElementById("completed-tasks").innerHTML)
 }
 
 // Get form elements
@@ -12,9 +12,9 @@ const form = document.getElementById("new-task")
 const task = document.getElementById("task")
 const dueDate = document.getElementById("due-date")
 const modal = document.getElementById("myModal");
-const tableList = document.getElementById("table-list")
+const tableList = document.getElementById("incomplete-tasks")
 
-// ---- Form validation 
+// ---- Form validation -----
 // Validate length of task
 const validLength = (input, min) => {
 	if (input.value.trim().length >= min) {
@@ -48,16 +48,18 @@ const validDate = (inputDate) => {
 	return inputDate.validity.valid;
 }
 
-// Change Event listeners
+// Change Event listeners for form
 task.addEventListener("change", () => validLength(task, 1))
 dueDate.addEventListener("change", () => validDate(dueDate))
 
+// Add new task to table
 function addTaskToTable(task, dueDate) {
 	// Create new row with cell elements for task, dudedate and checkbox 
 	const newRow = document.createElement("tr")
 	const colTask = document.createElement("td")
 	const colDueDate = document.createElement("td")
 	const colCheckBox = document.createElement("td")
+	const colDelete = document.createElement("td")
 
 	// Add value to each element
 	colTask.textContent = task.value
@@ -68,15 +70,29 @@ function addTaskToTable(task, dueDate) {
 	newCheckbox.type = "checkbox"
 	colCheckBox.appendChild(newCheckbox)
 	colCheckBox.classList.add("checkboxes-col")
+	
+	// Add Delete button
+	const delBtn = document.createElement("button")
+	delBtn.innerHTML = "Delete";
+	delBtn.classList.add("deleteButton-col")
+	colDelete.appendChild(delBtn)
 
 	// Append to new row and current table
-	newRow.append(colTask, colDueDate, colCheckBox)
+	newRow.append(colTask, colDueDate, colCheckBox, colDelete)
 	tableList.append(newRow)
 
 	// Clear value
 	task.value = ""
 	dueDate.value = ""
 }
+
+// Delete tasks button 
+document.addEventListener('click', (e) => {
+	if (e.target.classList.contains("deleteButton-col"))
+		e.target.closest("tr").remove()
+	saveTDList()
+})
+
 
 // Form validation for length and duedate
 const formValidation = (e) => {
@@ -108,20 +124,23 @@ form.addEventListener("submit", (e) => {
 })
 
 
-
+let imageTimeOut;
 // Display cat image as modal image
 function showCat(catUrl) {
 	const modalImg = document.getElementById("cat-pic");
 	modal.style.display = "block";
 	modalImg.src = catUrl;
+
+	imageTimeOut = setTimeout(() => {
+		modal.style.display = "none";
+	}, 5000)
 }
 
 // Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
-
-// When the user clicks on <span> (x), close the modal
-span.onclick = function () {
+var closeImage = document.getElementById("close");
+closeImage.onclick = function () {
 	modal.style.display = "none";
+	clearTimeout(imageTimeOut)
 }
 
 const listOfTasks = document.getElementById("today-list");
@@ -134,44 +153,35 @@ listOfTasks.addEventListener('change', (e) => {
 		message = "good%20job%21"
 
 		// Move marked checked!
-		setTimeout(() => {
-			const doneList = document.getElementById("done-list")
-			doneList.appendChild(e.target.closest("tr"))
-			saveTDList() 
-		}, 2500)
+		const doneList = document.getElementById("completed-tasks")
+		doneList.appendChild(e.target.closest("tr"))
+		saveTDList()
 
 	} else {
 		message = "you%20got%20this%21"
 
-		setTimeout(() => {
-			const tableList = document.getElementById("table-list")
-			tableList.appendChild(e.target.closest("tr"))
-			saveTDList()
-		}, 2500)
+		const tableList = document.getElementById("incomplete-tasks")
+		tableList.appendChild(e.target.closest("tr"))
+		saveTDList()
 	}
 
 	// Fetch API from Cataas
 	const url = `https://cataas.com/cat/says/${message}?font=Verdana&fontSize=30&fontColor=%23fff&position=bottom`
 
 	fetch(url)
-		// Check if the response was successful
-		// 	if (!response.ok) {
-		// 		throw new Error('Failed to fetch cat image.');
-		// 	}
-		// } catch (error) {
-		// 	// Log any errors that occur during the process
-		// 	console.error(error.message);
-		// 	throw error;
 		.then(function (data) {
-			return data.url
-		}).then(function (imageUrl, message) {
-			showCat(imageUrl)
+			if (data.ok) {
+				return data.url
+			}
+			throw new Error('Unable to fetch cat image');
+		}).then(function (imageUrl) {
+			showCat(imageUrl)	
+		}).catch((error) => {
+			console.log(error)
 		})
 });
 
-
-// non-blocking from setTimeout
+// doesn't take the final change
 // addEventListener("input", () => {
-// 	// saveTDList()
-// 	console.log("might work?")
+// 	saveTDList()
 // })
