@@ -1,13 +1,13 @@
 <html>
 
 <head>
-	<title>Today's List</title>
+	<title>Everyday List</title>
 	<link rel="stylesheet" href="finalproject.css" />
 </head>
 
 <body>
 	<div class="container">
-		<h1>Forever to-do-list</h1>
+		<h1>Everyday to-do-list</h1>
 	</div>
 
 	<div class="container">
@@ -33,26 +33,27 @@
 
 	<div id="today-list">
 		<table>
-			<tbody id ="table-header">
+			<tbody id ="incomplete-header">
 			<tr>
 				<th>Tasks</th>
 				<th>Due Dates</th>
 				<th>Progress</th>
+				<th>Delete</th>
 			</tr>
 		</tbody>		
-		<tbody id="table-list">
+		<tbody id="incomplete-tasks">
 		</tbody>
 		</table>
 
 		<table>
-			<tbody id ="done-header">
+			<tbody id ="completed-header">
 			<tr>
 				<th>Tasks</th>
 				<th>Due Dates</th>
 				<th>Completed</th>
 			</tr>
 		</tbody>		
-		<tbody id="done-list">
+		<tbody id="completed-tasks">
 		</tbody>
 		</table>
 	</div>
@@ -60,9 +61,8 @@
 
 
 <div id="myModal" class="modal">
-  <!-- The Close Button; to replace with setInterval???-->
-  <span class="close">&times;</span>
-  <img class="modal-content" id="cat-pic">
+  <span id="close">&times;</span>
+  <img  id="cat-pic" class="modal-content">
 </div>
 
 
