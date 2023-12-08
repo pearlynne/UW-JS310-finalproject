@@ -7,7 +7,8 @@ const listOfTasks = document.getElementById("today-list");
 let tableList = document.getElementById('incomplete-tasks');
 let completedList = document.getElementById('completed-tasks');
 
-// Class constructor to create new tasks
+// Class constructor to create new tasks 
+// To Fix: Add static method for checkbox and delete button
 class NewTask {
 	constructor(task, dueDate){
 		this.taskName = task;
@@ -163,7 +164,7 @@ function addTaskToTable(task, dueDate) {
 	<td><button class="deleteButton-col">Delete</button></td></tr>`)
 }
 
-/* ---------- Modal Image timeout ---------- */
+/* ---------- Timing function for modal image ---------- */
 let imageTimeOut;
 // Display cat image as modal image
 function showCat(catUrl) {
