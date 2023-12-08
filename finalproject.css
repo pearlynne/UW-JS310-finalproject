@@ -10,8 +10,9 @@ td {
 	border-color: purple;
 	padding: 5px;
 }
+
 th {
-	background: rgb(255, 236, 255,0.4);
+	background: rgb(255, 236, 255, 0.4);
 }
 
 table {
@@ -55,9 +56,8 @@ div {
 	background-color: #f5e0ef;
 	color: #00365d;
 	margin-bottom: 30px;
+	box-shadow: 4px 2px 2px #888;
 }
-
-/* To fix: Figure this out */
 
 /* The Modal (background) */
 .modal {
@@ -71,7 +71,7 @@ div {
 	height: 100%;
 	overflow: auto;
 	background-color: rgba(0, 0, 0, 0.6);
-	
+
 }
 
 /* Modal Content (Image) */
@@ -92,6 +92,19 @@ div {
 		transform: scale(1)
 	}
 }
+
+button {
+	border: none;
+	border-radius: 4px;
+	font-size: 15px;
+	padding: 5px;
+	width: 100%;
+	max-width: 20em;
+	background-color: #872341;
+	color: #fafdff;
+	box-shadow: 4px 2px 2px #888;
+}
+
 
 /* The Close Button */
 #close {
