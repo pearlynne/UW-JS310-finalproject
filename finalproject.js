@@ -88,9 +88,10 @@ const validLength = (input, min) => {
 
 // Validate due date
 const validDate = (inputDate) => {
-	const currentDate = new Date();
+	const todaysDate = new Date().toISOString().split('T')[0];
+	const currentDate = new Date(todaysDate + 'T00:00');
 	const dueDate = new Date(inputDate.value + 'T00:00')
-
+	
 	if (dueDate >= currentDate) {
 		inputDate.parentElement.classList.remove("invalid");
 		inputDate.validity.valid = true;
