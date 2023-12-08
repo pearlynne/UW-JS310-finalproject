@@ -1,17 +1,27 @@
-// Get form elements
+/* ---------- Form elements ---------- */
 const form = document.getElementById("new-task")
 const task = document.getElementById("task")
 const dueDate = document.getElementById("due-date")
 const modal = document.getElementById("myModal");
 const listOfTasks = document.getElementById("today-list");
 let tableList = document.getElementById('incomplete-tasks');
+let completedList = document.getElementById('completed-tasks');
+
+// Class constructor to create new tasks
+class NewTask {
+	constructor(task, dueDate){
+		this.taskName = task;
+		this.dueDate = dueDate;
+	}
+}
 
 
 /* ---------- Local storage ---------- */
-// Function to retrieve data and display data from local storage (if any)
+// Retrieve data and display data from local storage (if any)
 function getData() {
 	// Remove completed tasks
 	localStorage.removeItem("completed-tasks")
+
 	// Get incomplete tasks 
 	let previousTasks = JSON.parse(localStorage.getItem("incomplete-tasks"))
 	
@@ -29,11 +39,12 @@ function getData() {
 	}
 }
 
-// Function to save new tasks to local storage
+// Save new tasks to local storage with class constructor
 function saveTDList() {
 	let incompleteTaskList = [];
 	let completedTaskList = [];
 
+	// Create new class for incomplete tasks
 	tableList.childNodes.forEach(function (item) {
 		if (item.tagName == "TR") {
 			let taskName = item.childNodes[0].innerText
@@ -41,7 +52,8 @@ function saveTDList() {
 			incompleteTaskList.push(new NewTask(taskName, dueDate))
 		}
 	});
-	document.getElementById('completed-tasks').childNodes.forEach(function (item) {
+	// Create new class for completed tasks
+	completedList.childNodes.forEach(function (item) {
 		if (item.tagName == "TR") {
 			let taskName = item.childNodes[0].innerText
 			let dueDate = item.childNodes[2].innerText
@@ -54,12 +66,10 @@ function saveTDList() {
 }
 
 // Get data from local storage
-
 getData()
 
 
 /* ---------- Form Validation ---------- */
-
 // Validate length of task
 const validLength = (input, min) => {
 	if (input.value.trim().length >= min) {
@@ -79,8 +89,8 @@ const validLength = (input, min) => {
 // Validate due date
 const validDate = (inputDate) => {
 	const currentDate = new Date();
-
 	const dueDate = new Date(inputDate.value + 'T00:00')
+
 	if (dueDate >= currentDate) {
 		inputDate.parentElement.classList.remove("invalid");
 		inputDate.validity.valid = true;
@@ -99,7 +109,7 @@ task.addEventListener("change", () => validLength(task, 1))
 dueDate.addEventListener("change", () => validDate(dueDate))
 
  
-// Form validation for length and duedate
+// Form validation for length and due date
 const formValidation = (e) => {
 	e.preventDefault();
 	let valid = true;
@@ -113,42 +123,22 @@ const formValidation = (e) => {
 }
 
 
-/* ---------- Display to Table ---------- */
-// Class to create new tasks
-class NewTask {
-	constructor(task, dueDate){
-		this.taskName = task;
-		this.dueDate = dueDate;
-	}
-}
-
-// Add new data to table
-function addTaskToTable(task, dueDate) {
-	tableList.insertAdjacentHTML('beforeEnd',
-		`<tr><td>${task.value}</td>
-	<td>${dueDate.value}</td>
-	<td class="checkboxes-col"><input type="checkbox"></td>
-	<td><button class="deleteButton-col">Delete</button></td></tr>`)
-
-	// Clear value
-	task.value = "";
-	dueDate.value = "";
-}
-
-
-/* ---------- Event Listeners ---------- */
+/* ----- Event listeners for form submission ----- */
 form.addEventListener("submit", (e) => {
-
 	if (formValidation(e)) {
 		addTaskToTable(task, dueDate); 
 		saveTDList();
+
+	// Clear values on form
+	task.value = "";
+	dueDate.value = "";
 	} else {
 		e.preventDefault();
 		form.reportValidity();
 	}
 })
 
-// Delete tasks button 
+// Button to delete tasks
 document.addEventListener('click', (e) => {
 	if (e.target.classList.contains("deleteButton-col")) {
 		e.target.closest("tr").remove();
@@ -156,12 +146,21 @@ document.addEventListener('click', (e) => {
 	}
 })
 
-// Reset Button
+// Button to reset form and local storage
 document.getElementById("fresh-start").onclick = function () {
 	localStorage.clear()
 	location.reload()
 }
 
+/* ---------- Display tasks to table ---------- */
+// Add new data to table row
+function addTaskToTable(task, dueDate) {
+	tableList.insertAdjacentHTML('beforeEnd',
+		`<tr><td>${task.value}</td>
+	<td>${dueDate.value}</td>
+	<td class="checkboxes-col"><input type="checkbox"></td>
+	<td><button class="deleteButton-col">Delete</button></td></tr>`)
+}
 
 /* ---------- Modal Image timeout ---------- */
 let imageTimeOut;
