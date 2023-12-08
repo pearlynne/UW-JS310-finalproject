@@ -35,12 +35,12 @@ Therefore, I decided to create a basic to-do-list that focuses on tasks just for
 ## Roadmap <a name="Roadmap"></a>
 There is still room for improvements and new features to be added. These are the following planned:
 - <input type="checkbox" disabled /> Simplify /create new function for display of new tasks
-		- New tasks are saved into a class constructor for local storage
-    - However, it currently inserts new tasks to the table via innerAdjacentHTML instead of reading from constructor.
+	- New tasks are saved into a class constructor for local storage
+   	- However, it currently inserts new tasks to the table via innerAdjacentHTML instead of reading from constructor.
 - <input type="checkbox" disabled /> Implement static method to add checkboxes and delete button
-		- It currently adds checkboxes and delete button via innerHTML
+ 	- It currently adds checkboxes and delete button via innerHTML
 
 ## Acknowledgements/Sources <a name="sources"></a>
-- This uses <a href="- https://cataas.com/">CATAAS</a>, a rest API!
+- This uses <a href="https://cataas.com/">CATAAS</a>, a rest API!
 - This is an extension from <a href="https://github.com/UWC2-JSCRIPT/au23-310-class-5-exercises-pearlynne/blob/master/toDoList.js"> UW JS310 Class 5 homework </a> 
 - Modal CSS code modified from <a href="https://www.w3schools.com/howto/howto_css_modal_images.asp"> W3 Schools </a>
